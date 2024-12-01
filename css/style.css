@@ -1,0 +1,22 @@
+#gameBoard {
+    width: 320px;
+    height: 320px;
+    display: flex;
+    flex-wrap: wrap; /*permet de faire revenir à la ligne si nécessaire*/
+}
+.square svg{
+    height: 30px;
+    width: 30px;
+    margin: 5px;
+}
+.square {
+    height: 40px;
+    width: 40px;
+}
+
+.beige{
+    background-color: rgb(110,110,98);
+}
+.brown{
+    background-color: brown;
+}

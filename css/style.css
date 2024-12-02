@@ -20,3 +20,9 @@
 .brown{
     background-color: brown;
 }
+.black{
+    fill: black;/* permet de changer la couleur d'un svg */
+}
+.white{
+    fill: white;
+}

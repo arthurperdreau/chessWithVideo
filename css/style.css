@@ -8,10 +8,21 @@
     height: 30px;
     width: 30px;
     margin: 5px;
+    position: relative;
+    z-index: -8;
+}
+.path{
+    position: relative;
+    z-index: -9;
+}
+.piece{
+    position: relative;
+    z-index: 8;
 }
 .square {
     height: 40px;
     width: 40px;
+    position: relative;
 }
 
 .beige{

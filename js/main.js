@@ -62,11 +62,25 @@ function dragDrop(e){
     e.stopPropagation()//--> stop les événements ou actions suivants associés à e
     const correctGo=draggedElement.firstChild.classList.contains(playerGo);
     const taken=e.target.classList.contains("piece")
+    const valid=checkIfValid(e.target)
     const opponentGo=playerGo==="white"?"black":"white"
     const takenByOpponent=e.target.firstChild?.classList.contains(opponentGo);
-    //e.target.parentNode.append(draggedElement)
-    //e.target.remove()
-    changePlayer()
+    if(takenByOpponent && valid){
+        e.target.parentNode.append(draggedElement)
+        e.target.remove()
+        changePlayer()
+        return
+    }
+    if(taken && !takenByOpponent){
+        infoDisplay.textContent="You can't go here"
+        setTimeout(()=>infoDisplay.textContent="",2000)//--> effectue l'instruction après 2000 ms. Permet d'ajouter une temporisation
+        return;
+    }
+    if(valid){
+        e.target.append(draggedElement)
+        changePlayer()
+        return
+    }
 }
 function changePlayer(){
     if(playerGo==="black"){
@@ -90,4 +104,18 @@ function revertIds(){
     allSquares.forEach((square,i)=>
         square.setAttribute("squareId",i))
 }
-//30min
+
+function checkIfValid(target){
+    const targetId=Number(target.getAttribute("squareId")) ||Number( target.parentNode.getAttribute("squareId"))
+    const startId=Number(startPositionId)
+    const piece=draggedElement.id
+    switch(piece){
+        case "pawn":
+            const starterRow=[8,9,10,11,12,13,14,15]
+            if (starterRow.includes(startId) && startId + width*2 ===targetId || startId+width===targetId || startId+width-1===targetId && document.querySelector(`[squareId="${startId+width-1}"]`).firstChild|| startId+width+1===targetId && document.querySelector(`[squareId="${startId+width+1}"]`).firstChild){return true}
+            break;
+    }
+
+}
+
+//1h02
